@@ -1,0 +1,23 @@
+# AI Visibility Audit engine — Python dependencies.
+# Many are already installed globally on this machine (see ~/.claude/CLAUDE.md):
+#   requests, beautifulsoup4 (bs4), lxml, python-dotenv (dotenv), anthropic, playwright
+# The ones below the line are the new additions this project needs.
+
+requests
+beautifulsoup4
+lxml
+python-dotenv
+anthropic
+
+# --- new for this project ---
+openai                  # ChatGPT AIO check (Responses API + web_search tool)
+extruct                 # JSON-LD / microdata / RDFa schema detection
+jinja2                  # branded HTML report templating
+google-search-results   # SerpAPI client (Google AI Overview capture)
+playwright              # headless-browser fallback for Cloudflare/JS-gated sites (global; needs
+                        #   `python -m playwright install chromium` once for the browser binary)
+
+# --- web API (Beacon frontend backend) ---
+fastapi                 # the /chat, /audit, /status, /report API (api/main.py)
+uvicorn[standard]       # ASGI server
+groq                    # cheap-model interview (tools/interview.py) + groq synthesis backend

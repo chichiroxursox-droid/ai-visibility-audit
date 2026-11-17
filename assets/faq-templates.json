@@ -1,0 +1,152 @@
+{
+  "_meta": {
+    "purpose": "Question scaffolding for the AIO-Citation Kit FAQ generator (Deliverable 2).",
+    "how_used": "These are QUESTION prompts only — never canned answers. The generator hands the relevant set to the model as topic seeds, and uses them directly only as a no-LLM fallback (every fallback answer is flagged 'template — rewrite with real specifics'). Answers are always drafted per-business and gated by a human fact-check.",
+    "rule": "Questions must be ones a real local customer would type into ChatGPT/Perplexity. No keyword stuffing, no business-specific facts baked in here.",
+    "updated": "2026-06-19"
+  },
+  "universal": [
+    "What areas do you serve?",
+    "How do I get a quote or estimate?",
+    "How soon can you schedule an appointment?",
+    "How do I book your service?",
+    "What should I do to prepare before you arrive?",
+    "How long does the job usually take?",
+    "What payment methods do you accept?",
+    "Do you offer any warranty or guarantee on your work?"
+  ],
+  "by_trade": {
+    "auto_repair": [
+      "How do I know if I need new brakes?",
+      "Can you do the repair at my home or workplace?",
+      "What warning signs mean my car needs to be looked at right away?",
+      "Do you use OEM or aftermarket parts?",
+      "How long does a brake job take?",
+      "Can you give an estimate before starting the work?",
+      "Is mobile auto repair as reliable as a shop?",
+      "What information do you need to quote my repair?"
+    ],
+    "pressure_washing": [
+      "How often should I have my house washed?",
+      "Will pressure washing damage my siding, paint, or roof?",
+      "What surfaces can you clean?",
+      "Do I need to be home during the service?",
+      "Soft washing vs. pressure washing — which does my house need?",
+      "Will you remove mold, algae, and mildew?",
+      "Do you bring your own water and equipment?",
+      "How long does it take to wash a typical house or driveway?"
+    ],
+    "plumbing": [
+      "What counts as a plumbing emergency?",
+      "How fast can you come out for a leak?",
+      "What are the signs I have a hidden water leak?",
+      "Do you charge for a diagnostic or service call?",
+      "Can you fix a water heater the same visit?",
+      "What should I do to shut off my water before you arrive?",
+      "How do I know if I need a repair or a full replacement?",
+      "Do you handle both residential and small commercial jobs?"
+    ],
+    "electrical": [
+      "Is a flickering or buzzing circuit dangerous?",
+      "When should I call an electrician instead of resetting a breaker?",
+      "Can you upgrade my electrical panel?",
+      "Do you install EV chargers, ceiling fans, or outlets?",
+      "What are the signs my wiring is unsafe?",
+      "Do you pull permits for electrical work?",
+      "How soon can you respond to an electrical problem?",
+      "How do you price electrical jobs?"
+    ],
+    "hvac": [
+      "How often should I service my AC or furnace?",
+      "Why is my AC running but not cooling?",
+      "Should I repair or replace my old system?",
+      "How fast can you come out when my heat or AC is down?",
+      "What size system does my home need?",
+      "Do you offer maintenance plans?",
+      "What does a tune-up include?",
+      "How can I lower my energy bill?"
+    ],
+    "roofing": [
+      "How do I know if my roof has storm damage?",
+      "Do you offer free roof inspections?",
+      "Repair or replace — how do you decide?",
+      "Do you help with insurance claims?",
+      "How long does a roof replacement take?",
+      "What roofing materials do you install?",
+      "How long should a new roof last?",
+      "Do you handle leaks and emergency tarping?"
+    ],
+    "landscaping": [
+      "What landscaping services do you offer?",
+      "Do you offer one-time cleanups or only regular maintenance?",
+      "How often should my lawn be mowed?",
+      "Can you design and install a new landscape?",
+      "Do you handle irrigation and sprinkler repair?",
+      "When is the best time of year for planting in my area?",
+      "Do you provide free estimates for projects?",
+      "Do you haul away the yard debris?"
+    ],
+    "cleaning": [
+      "What does a standard cleaning include?",
+      "Do you bring your own supplies and equipment?",
+      "Do I need to be home during the cleaning?",
+      "How do you price a cleaning — by hour, room, or square footage?",
+      "Do you offer recurring weekly or biweekly service?",
+      "What is the difference between standard and deep cleaning?",
+      "Are your cleaning products safe for pets and kids?",
+      "How far in advance should I book?"
+    ],
+    "beauty_salon": [
+      "Do I need an appointment or do you take walk-ins?",
+      "How do I book with a specific stylist?",
+      "What services do you offer?",
+      "How early should I arrive for my appointment?",
+      "What is your cancellation or rescheduling policy?",
+      "Do you offer consultations before a big change?",
+      "What forms of payment do you accept?",
+      "Do you have parking available?"
+    ],
+    "moving": [
+      "How do you price a move — by hour or by weight?",
+      "How far in advance should I book my move?",
+      "Do you handle local and long-distance moves?",
+      "Do you supply boxes and packing materials?",
+      "Will you disassemble and reassemble furniture?",
+      "Are my belongings covered if something is damaged?",
+      "How do I prepare for moving day?",
+      "Do you move specialty items like pianos or gym equipment?"
+    ],
+    "pet_services": [
+      "Do you come to my home for grooming?",
+      "What does a full grooming appointment include?",
+      "How often should my dog or cat be groomed?",
+      "How long does a grooming session take?",
+      "Do you handle anxious or senior pets?",
+      "What breeds and sizes do you work with?",
+      "How do I book and what is your cancellation policy?",
+      "What should I do to prepare my pet?"
+    ],
+    "home_services": [
+      "What types of jobs do you take on?",
+      "Do you handle small repairs as well as larger projects?",
+      "How do you charge — by the hour or by the project?",
+      "How soon can you start?",
+      "Do you provide a written estimate first?",
+      "Do you supply the materials or should I?",
+      "What areas do you cover?",
+      "Do you clean up and haul away debris when finished?"
+    ],
+    "coaching": [
+      "What ages and skill levels do you work with?",
+      "Do you offer one-on-one (private) sessions, group sessions, or both?",
+      "Where do the sessions take place?",
+      "How long is each session, and how often do you recommend coming?",
+      "Do you offer a free trial session or an initial assessment?",
+      "What should I (or my child) bring or wear to a session?",
+      "What's your coaching background and experience?",
+      "How do you tailor sessions to a beginner versus a more advanced student?",
+      "How do I book a session, and what is your cancellation or rescheduling policy?",
+      "How do you track progress over time?"
+    ]
+  }
+}

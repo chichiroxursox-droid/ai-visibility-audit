@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ v.brand }} — Market Scan</title>
+<style>
+  :root {
+    --bg: #0b0c10; --panel: #131519; --fg: #e9ebee; --muted: #8b929c;
+    --signal: #35e6a4; --warn: #f5a623; --danger: #e2403b;
+    --line: rgba(255,255,255,0.09);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 40px 28px 64px; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .eyebrow { font-family: ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--muted); }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 40px;
+       line-height: 1.05; letter-spacing: -0.01em; margin: 10px 0 4px; }
+  h2 { font-family: Georgia, serif; font-weight: 400; font-size: 24px; margin: 40px 0 14px; }
+  .sub { color: var(--muted); }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; }
+  .hero { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; }
+  .verdict { font-family: Georgia, serif; font-size: 44px; line-height: 1; text-transform: capitalize; }
+  .verdict.low { color: var(--signal); } .verdict.moderate { color: var(--warn); } .verdict.high { color: var(--danger); }
+  .counts { text-align: right; }
+  .counts b { font-size: 30px; font-family: Georgia, serif; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+  td.num { text-align: right; font-family: ui-monospace, monospace; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip { border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 13px;
+          font-family: ui-monospace, monospace; }
+  .chip.signal { border-color: color-mix(in oklab, var(--signal) 40%, transparent); color: var(--signal); }
+  .cta { margin-top: 40px; background: linear-gradient(180deg, rgba(53,230,164,.10), transparent);
+         border: 1px solid color-mix(in oklab, var(--signal) 30%, transparent); border-radius: 16px; padding: 26px; }
+  .btn { display: inline-block; margin-top: 12px; background: var(--signal); color: #05231a;
+         font-weight: 600; padding: 12px 20px; border-radius: 10px; text-decoration: none; }
+  footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: 12px; }
+  .empty { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">{{ v.brand }} · market scan</div>
+  <h1>The market you&rsquo;re about to enter.</h1>
+  <div class="sub">{{ v.category }}{% if v.city %} · {{ v.city }}{% endif %}{% if v.generated %} · {{ v.generated }}{% endif %}</div>
+
+  <div class="hero card">
+    <div>
+      <div class="eyebrow">saturation</div>
+      <div class="verdict {{ v.saturation }}">{{ v.saturation or "unknown" }}</div>
+      <div class="sub" style="margin-top:6px; max-width:340px; font-size:14px;">
+        {% if v.saturation == "low" %}Room to move — few entrenched players. Move fast and you can own this.
+        {% elif v.saturation == "moderate" %}A real fight, but winnable with a sharp niche and consistent reviews.
+        {% else %}Crowded with established names. You&rsquo;ll need a clear wedge to break in.{% endif %}
+      </div>
+    </div>
+    <div class="counts">
+      <div class="sub eyebrow">players found</div>
+      <b>{{ v.player_count }}</b>
+      <div class="sub eyebrow" style="margin-top:10px;">established (100+ reviews)</div>
+      <b>{{ v.established_count }}</b>
+    </div>
+  </div>
+
+  <h2>Who you&rsquo;re up against</h2>
+  <div class="card" style="padding:8px 20px;">
+    {% if v.top_players %}
+    <table>
+      <thead><tr><th>Business</th><th style="text-align:right">Rating</th><th style="text-align:right">Reviews</th></tr></thead>
+      <tbody>
+        {% for p in v.top_players %}
+        <tr>
+          <td>{{ p.name }}</td>
+          <td class="num">{{ p.rating if p.rating is not none else "—" }}</td>
+          <td class="num">{{ p.review_count if p.review_count is not none else "—" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p class="empty" style="padding:14px 0;">No competitors resolved for this market.</p>{% endif %}
+  </div>
+
+  <h2>Who the AI assistants already recommend</h2>
+  {% if v.ai_recommends %}
+    <div class="chips">
+      {% for name in v.ai_recommends %}<span class="chip">{{ name }}</span>{% endfor %}
+    </div>
+    <p class="sub" style="font-size:14px;">These are the names ChatGPT, Perplexity &amp; Google&rsquo;s AI surface when a customer asks. Your job: earn your way onto this list.</p>
+  {% else %}
+    <p class="empty">The assistants didn&rsquo;t consistently name specific businesses for this query — an opening. Being the clear, well-listed answer is up for grabs.</p>
+  {% endif %}
+
+  <h2>Get listed here from day one</h2>
+  {% if v.trusted_domains %}
+    <div class="chips">
+      {% for d in v.trusted_domains %}<span class="chip signal">{{ d }}</span>{% endfor %}
+    </div>
+    <p class="sub" style="font-size:14px;">These are the exact sites the AIs cited when answering. A profile on each is how a newcomer gets found — before you&rsquo;ve done a single job.</p>
+  {% else %}
+    <p class="empty">No cited sources captured (add the AI keys to populate this). Start with Google Business Profile, then your top trade directories.</p>
+  {% endif %}
+
+  <div class="cta">
+    <div class="eyebrow">your move</div>
+    <div style="font-family:Georgia,serif; font-size:26px; margin-top:6px;">Want a launch plan for this market?</div>
+    <p class="sub" style="max-width:520px;">We&rsquo;ll turn this scan into a step-by-step plan — the listings to claim, the profile to build, the reviews to chase — so you show up from the day you open.</p>
+    <a class="btn" href="#">Reply to this report to get started →</a>
+  </div>
+
+  <footer>
+    Business &amp; competitor data from Google. This is a dated snapshot; AI answers vary run to run.
+    {% if v.cost is not none %} · scan cost ${{ v.cost }}{% endif %}
+  </footer>
+</div>
+</body>
+</html>

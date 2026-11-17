@@ -1,0 +1,604 @@
+{
+  "_meta": {
+    "purpose": "Curated map of the directories/sources AI assistants cite for local-business queries. The Directory-Gap algorithm (tools/directory_gap.py) cross-references a business's audit aio.cited_domains[] against this map to build a ranked 'get listed here' list. Facts current to June 2026.",
+    "category_values": [
+      "review",
+      "directory",
+      "social",
+      "trade_specific",
+      "aggregator_readonly"
+    ],
+    "verification_values": [
+      "video",
+      "phone_pin",
+      "phone_or_email",
+      "phone_email_or_postcard",
+      "tax_id",
+      "account",
+      "none",
+      "auto_sync"
+    ],
+    "maintained_by": "us — keep claim_url + verification current; trades expand over time",
+    "reweighted_2026_07_12": "ChatGPT's local answers run through Bing's index; Facebook + Yelp are the dominant review sources on Bing Places results (Whitespark 2026), and ChatGPT cannot read Google reviews. cited_by_default now feeds the gap-list score so the Bing/Facebook/Yelp pipeline outranks filler directories."
+  },
+  "directories": [
+    {
+      "domain": "google.com",
+      "display_name": "Google Business Profile",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.google.com/business/",
+      "verification": "video",
+      "effort_minutes": 20,
+      "free": true,
+      "cited_by_default": [
+        "chatgpt",
+        "perplexity",
+        "google_ai_overview"
+      ],
+      "trade_specific_for": [],
+      "requirements": [
+        "phone"
+      ],
+      "notes": "Foundation of local + AI visibility. 2026 verification is video-first (live/recorded storefront); postcard is deprecated/rare."
+    },
+    {
+      "domain": "yelp.com",
+      "display_name": "Yelp",
+      "category": "review",
+      "claimable": true,
+      "claim_url": "https://biz.yelp.com/claim",
+      "verification": "phone_pin",
+      "effort_minutes": 10,
+      "free": true,
+      "cited_by_default": [
+        "chatgpt",
+        "perplexity",
+        "google_ai_overview"
+      ],
+      "trade_specific_for": [],
+      "requirements": [
+        "phone"
+      ],
+      "notes": "Heavily cited by every engine; #2 review source on Bing Places results (the ChatGPT pipeline) and a primary data source for Apple Maps. New pages usually live within 24h; Verified License badge up to 5 business days."
+    },
+    {
+      "domain": "bingplaces.com",
+      "display_name": "Bing Places",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.bingplaces.com/",
+      "verification": "phone_email_or_postcard",
+      "effort_minutes": 15,
+      "free": true,
+      "cited_by_default": [
+        "chatgpt"
+      ],
+      "trade_specific_for": [],
+      "requirements": [
+        "phone"
+      ],
+      "notes": "Top-tier AI lever: ChatGPT's local answers run through Bing's index, and Copilot pulls local data from Bing Places directly. 7-10 day verification. Can import from Google."
+    },
+    {
+      "domain": "apple.com",
+      "display_name": "Apple Business Connect",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://businessconnect.apple.com/",
+      "verification": "tax_id",
+      "effort_minutes": 20,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "requirements": [
+        "ein_or_tax_id"
+      ],
+      "notes": "Powers Apple Maps + Siri. 2026: D-U-N-S no longer mandatory in US — accepts EIN / Federal Taxpayer ID + Apple ID."
+    },
+    {
+      "domain": "bbb.org",
+      "display_name": "Better Business Bureau",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.bbb.org/get-listed",
+      "verification": "phone_or_email",
+      "effort_minutes": 15,
+      "free": true,
+      "cited_by_default": [
+        "chatgpt",
+        "perplexity"
+      ],
+      "trade_specific_for": [],
+      "requirements": [],
+      "notes": "Free listing; paid accreditation optional. Trust signal AIs cite for credibility."
+    },
+    {
+      "domain": "facebook.com",
+      "display_name": "Facebook Business Page",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.facebook.com/business/pages/set-up",
+      "verification": "account",
+      "effort_minutes": 20,
+      "free": true,
+      "cited_by_default": [
+        "chatgpt",
+        "perplexity"
+      ],
+      "trade_specific_for": [],
+      "requirements": [
+        "business_docs_for_verified"
+      ],
+      "notes": "Basic page is free; a Verified badge in 2026 may require business docs (license/EIN). Top-tier for ChatGPT: Facebook is the most common review source on Bing Places results (Whitespark 2026), and ChatGPT can't read Google reviews — a Google-only reputation is invisible to it."
+    },
+    {
+      "domain": "mapquest.com",
+      "display_name": "MapQuest",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://business.mapquest.com/",
+      "verification": "phone_or_email",
+      "effort_minutes": 10,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "requirements": [],
+      "notes": "Data-aggregator listing; cheap coverage."
+    },
+    {
+      "domain": "foursquare.com",
+      "display_name": "Foursquare",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://business.foursquare.com/",
+      "verification": "phone_or_email",
+      "effort_minutes": 10,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "requirements": [],
+      "notes": "Feeds many downstream maps/apps via its location dataset."
+    },
+    {
+      "domain": "yellowpages.com",
+      "display_name": "YellowPages (YP)",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://accounts.yellowpages.com/register",
+      "verification": "phone_or_email",
+      "effort_minutes": 10,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "requirements": [],
+      "notes": "Free basic listing; still surfaces in aggregator answers."
+    },
+    {
+      "domain": "manta.com",
+      "display_name": "Manta",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.manta.com/claim",
+      "verification": "phone_or_email",
+      "effort_minutes": 10,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "requirements": [],
+      "notes": "Small-business directory; easy free citation."
+    },
+    {
+      "domain": "angi.com",
+      "display_name": "Angi",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.angi.com/companylist/",
+      "verification": "phone_or_email",
+      "effort_minutes": 30,
+      "free": false,
+      "cited_by_default": [
+        "chatgpt",
+        "perplexity"
+      ],
+      "trade_specific_for": [
+        "pressure washing service",
+        "plumber",
+        "electrician",
+        "hvac contractor",
+        "roofing contractor",
+        "handyman",
+        "house cleaning service",
+        "general contractor",
+        "landscaper",
+        "painter",
+        "fencing contractor",
+        "concrete contractor",
+        "garage door service",
+        "moving company",
+        "pest control"
+      ],
+      "requirements": [
+        "background_check",
+        "license"
+      ],
+      "notes": "Home-services lead platform AIs cite. Paid + background check + license verification. HomeAdvisor merged in — claim on Angi only (HomeAdvisor redirects)."
+    },
+    {
+      "domain": "thumbtack.com",
+      "display_name": "Thumbtack",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.thumbtack.com/pro/",
+      "verification": "phone_or_email",
+      "effort_minutes": 30,
+      "free": false,
+      "cited_by_default": [
+        "chatgpt",
+        "perplexity"
+      ],
+      "trade_specific_for": [
+        "pressure washing service",
+        "house cleaning service",
+        "handyman",
+        "landscaper",
+        "painter",
+        "moving company",
+        "photographer",
+        "personal trainer"
+      ],
+      "requirements": [
+        "background_check"
+      ],
+      "notes": "Pay-per-lead services marketplace; commonly cited for home-services queries."
+    },
+    {
+      "domain": "houzz.com",
+      "display_name": "Houzz",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://www.houzz.com/proRegistration",
+      "verification": "phone_or_email",
+      "effort_minutes": 20,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "general contractor",
+        "roofing contractor",
+        "painter",
+        "landscaper",
+        "flooring contractor",
+        "concrete contractor",
+        "fencing contractor",
+        "interior designer"
+      ],
+      "notes": "Home remodeling/design directory; strong for construction + design trades."
+    },
+    {
+      "domain": "carfax.com",
+      "display_name": "Carfax Service Shops",
+      "category": "aggregator_readonly",
+      "claimable": false,
+      "claim_url": null,
+      "verification": "auto_sync",
+      "effort_minutes": 0,
+      "free": true,
+      "cited_by_default": [
+        "chatgpt",
+        "perplexity"
+      ],
+      "trade_specific_for": [
+        "auto repair shop",
+        "brake repair",
+        "auto detailing",
+        "car wash"
+      ],
+      "notes": "READ-ONLY: Carfax syncs service records from shop systems / data feeds — not a self-claim. Surface as 'ensure your shop-management software reports to Carfax', never a claim task."
+    },
+    {
+      "domain": "repairpal.com",
+      "display_name": "RepairPal",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://repairpal.com/shops/join",
+      "verification": "phone_or_email",
+      "effort_minutes": 20,
+      "free": false,
+      "cited_by_default": [
+        "perplexity"
+      ],
+      "trade_specific_for": [
+        "auto repair shop",
+        "brake repair"
+      ],
+      "notes": "Certified auto-repair network AIs cite for trustworthy mechanics. Certification has standards + fee."
+    },
+    {
+      "domain": "mechanicadvisor.com",
+      "display_name": "Mechanic Advisor",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://www.mechanicadvisor.com/",
+      "verification": "phone_or_email",
+      "effort_minutes": 15,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "auto repair shop",
+        "brake repair"
+      ],
+      "notes": "Auto-repair directory; free listing."
+    },
+    {
+      "domain": "porch.com",
+      "display_name": "Porch",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://pro.porch.com/",
+      "verification": "phone_or_email",
+      "effort_minutes": 20,
+      "free": false,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "pressure washing service",
+        "handyman",
+        "general contractor",
+        "roofing contractor",
+        "house cleaning service"
+      ],
+      "notes": "Home-services lead network; paid leads."
+    },
+    {
+      "domain": "nextdoor.com",
+      "display_name": "Nextdoor",
+      "category": "social",
+      "claimable": true,
+      "claim_url": "https://business.nextdoor.com/",
+      "verification": "account",
+      "effort_minutes": 15,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "notes": "Hyperlocal neighborhood network. A free Business Page is claimable, but real value is neighbor recommendations — treat as participation + a claimable page."
+    },
+    {
+      "domain": "reddit.com",
+      "display_name": "Reddit",
+      "category": "social",
+      "claimable": false,
+      "claim_url": null,
+      "verification": "none",
+      "effort_minutes": 0,
+      "free": true,
+      "cited_by_default": [
+        "perplexity",
+        "chatgpt"
+      ],
+      "trade_specific_for": [],
+      "notes": "PARTICIPATION, not a claim. Perplexity cites Reddit very heavily (~40%+ of local answers). Win it by authentic, disclosed participation in local/trade subreddits — NEVER sockpuppets or spam."
+    },
+    {
+      "domain": "quora.com",
+      "display_name": "Quora",
+      "category": "social",
+      "claimable": false,
+      "claim_url": null,
+      "verification": "none",
+      "effort_minutes": 0,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "notes": "PARTICIPATION. Answer real trade/city questions authentically with your expertise; AIs sometimes pull from it."
+    },
+    {
+      "domain": "wikipedia.org",
+      "display_name": "Wikipedia",
+      "category": "aggregator_readonly",
+      "claimable": false,
+      "claim_url": null,
+      "verification": "none",
+      "effort_minutes": 0,
+      "free": true,
+      "cited_by_default": [
+        "perplexity",
+        "google_ai_overview"
+      ],
+      "trade_specific_for": [],
+      "notes": "READ-ONLY for an SMB: you cannot 'claim' a page, and most local businesses lack the independent sourcing to merit one. Informational only."
+    },
+    {
+      "domain": "hotfrog.com",
+      "display_name": "Hotfrog",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.hotfrog.com/add-your-business",
+      "verification": "phone_or_email",
+      "effort_minutes": 8,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "notes": "Free business directory; quick citation coverage."
+    },
+    {
+      "domain": "chamberofcommerce.com",
+      "display_name": "ChamberofCommerce.com",
+      "category": "directory",
+      "claimable": true,
+      "claim_url": "https://www.chamberofcommerce.com/",
+      "verification": "phone_or_email",
+      "effort_minutes": 10,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [],
+      "notes": "National directory + local chamber connections; free basic listing."
+    },
+    {
+      "domain": "expertise.com",
+      "display_name": "Expertise.com",
+      "category": "aggregator_readonly",
+      "claimable": false,
+      "claim_url": null,
+      "verification": "none",
+      "effort_minutes": 0,
+      "free": true,
+      "cited_by_default": [
+        "chatgpt"
+      ],
+      "trade_specific_for": [],
+      "notes": "READ-ONLY 'best X in city' editorial lists AIs cite. Can't self-claim; they select businesses. You can apply/contact but inclusion isn't guaranteed — informational."
+    },
+    {
+      "domain": "coachup.com",
+      "display_name": "CoachUp",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://www.coachup.com/coaches",
+      "verification": "email",
+      "effort_minutes": 20,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "basketball",
+        "soccer",
+        "baseball",
+        "football",
+        "tennis",
+        "volleyball",
+        "golf",
+        "hockey",
+        "lacrosse",
+        "softball",
+        "swim",
+        "gymnastics",
+        "sports",
+        "athletic",
+        "coaching",
+        "training"
+      ],
+      "requirements": [],
+      "notes": "Private sports-coaching marketplace. Create a coach profile (free to list; CoachUp takes a cut of booked sessions). AI assistants cite it for 'best <sport> coach/lessons' queries."
+    },
+    {
+      "domain": "athletesuntapped.com",
+      "display_name": "Athletes Untapped",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://www.athletesuntapped.com/",
+      "verification": "email",
+      "effort_minutes": 20,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "basketball",
+        "soccer",
+        "baseball",
+        "football",
+        "tennis",
+        "volleyball",
+        "golf",
+        "hockey",
+        "lacrosse",
+        "softball",
+        "swim",
+        "gymnastics",
+        "sports",
+        "athletic",
+        "coaching",
+        "training"
+      ],
+      "requirements": [],
+      "notes": "Private sports-coaching marketplace. Sign up via 'Become a Coach' (free to list; commission on sessions). Verify the exact signup link."
+    },
+    {
+      "domain": "teachme.to",
+      "display_name": "TeachMe.to",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://teachme.to/",
+      "verification": "email",
+      "effort_minutes": 20,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "basketball",
+        "soccer",
+        "baseball",
+        "football",
+        "tennis",
+        "volleyball",
+        "golf",
+        "hockey",
+        "lacrosse",
+        "softball",
+        "swim",
+        "gymnastics",
+        "sports",
+        "athletic",
+        "coaching",
+        "training",
+        "lessons",
+        "tutoring",
+        "music",
+        "guitar",
+        "piano",
+        "voice",
+        "tennis",
+        "golf",
+        "swim"
+      ],
+      "requirements": [],
+      "notes": "Broad lessons marketplace (sports, music, academics). Apply as an instructor. AI assistants increasingly cite it."
+    },
+    {
+      "domain": "wyzant.com",
+      "display_name": "Wyzant",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://www.wyzant.com/",
+      "verification": "background_check",
+      "effort_minutes": 30,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "tutoring",
+        "tutor",
+        "math",
+        "reading",
+        "writing",
+        "science",
+        "spanish",
+        "french",
+        "english",
+        "test prep",
+        "sat",
+        "act"
+      ],
+      "requirements": [],
+      "notes": "Academic/test-prep tutoring marketplace. Free to apply; identity/background verification; Wyzant takes a commission. Click 'Apply to tutor'."
+    },
+    {
+      "domain": "takelessons.com",
+      "display_name": "TakeLessons",
+      "category": "trade_specific",
+      "claimable": true,
+      "claim_url": "https://takelessons.com/",
+      "verification": "email",
+      "effort_minutes": 25,
+      "free": true,
+      "cited_by_default": [],
+      "trade_specific_for": [
+        "music",
+        "guitar",
+        "piano",
+        "voice",
+        "singing",
+        "drums",
+        "violin",
+        "language",
+        "tutoring"
+      ],
+      "requirements": [],
+      "notes": "Music & academic lessons marketplace. Apply as a teacher; verify current onboarding."
+    }
+  ]
+}

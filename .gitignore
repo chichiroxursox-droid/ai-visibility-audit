@@ -1,0 +1,46 @@
+# Allowlist: the public repo is the engine, the API seam, and the docs that explain them.
+# Everything else in this folder (client work, real audit reports, lead data, prospect
+# research, business docs, the coaching site, the Next.js app with its own git, media)
+# stays local.
+/*
+!/.gitignore
+!/.dockerignore
+!/.env.example
+!/README.md
+!/DEPLOY.md
+!/Dockerfile
+!/render.yaml
+!/requirements.txt
+!/tools/
+!/api/
+!/tests/
+!/templates/
+!/assets/
+!/workflows/
+!/docs/
+/docs/*
+!/docs/superpowers/
+/docs/superpowers/*
+!/docs/superpowers/specs/
+/docs/superpowers/specs/*
+!/docs/superpowers/specs/2026-06-19-aio-citation-kit-design.md
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Disposable intermediate files + generated reports + lead log
+.tmp/
+*.report.html
+data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# OS
+.DS_Store

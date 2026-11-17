@@ -1,0 +1,38 @@
+# Render Blueprint for the Beacon audit API.
+# Deploy: push this repo to GitHub, then Render → New → Blueprint → pick the repo.
+# Set every `sync: false` secret in the Render dashboard after the first deploy.
+services:
+  - type: web
+    name: beacon-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter          # Chromium needs headroom; the 512MB free tier can OOM mid-scan.
+    region: oregon
+    healthCheckPath: /openapi.json
+    autoDeploy: true
+    envVars:
+      - key: AUDIT_SYNTH_BACKEND
+        value: groq         # free synthesis; no Anthropic key needed
+      - key: BRAND_NAME
+        value: Beacon
+      - key: DAILY_AUDIT_CAP
+        value: "50"         # spend ceiling: <= DAILY_AUDIT_CAP * MAX_AUDIT_COST_USD/day
+      - key: RATE_LIMIT_PER_HOUR
+        value: "3"
+      - key: MAX_AUDIT_COST_USD
+        value: "0.60"
+      # --- set these in the dashboard (secrets / the Vercel URL) ---
+      - key: FRONTEND_ORIGINS   # e.g. https://beacon.vercel.app  (CORS allowlist)
+        sync: false
+      - key: GOOGLE_MAPS_API_KEY
+        sync: false
+      - key: PAGESPEED_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PERPLEXITY_API_KEY
+        sync: false
+      - key: SERPAPI_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false

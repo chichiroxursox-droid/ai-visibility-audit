@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ v.business_name }} — AI-Citation Kit</title>
+<style>
+  :root{
+    --ink:#14313a; --ink-2:#3c5560; --line:#e4e8ea; --bg:#f3f1ec; --card:#ffffff;
+    --accent:#e0853a; --muted:#7c8a90; --good:#1faa59; --warn:#f5a623; --bad:#e2403b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  .page{max-width:860px;margin:32px auto;background:var(--card);border-radius:14px;
+    box-shadow:0 12px 40px rgba(20,49,58,.10);overflow:hidden}
+  .pad{padding:34px 46px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;color:var(--ink);margin:0}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    font-weight:700;font-family:-apple-system,Segoe UI,Roboto,sans-serif}
+  .muted{color:var(--muted)}
+  a{color:var(--accent)}
+
+  header{background:var(--ink);color:#fff;padding:30px 46px}
+  header .brand{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#cfe0e4}
+  header h1{color:#fff;font-size:32px;margin-top:12px;line-height:1.15}
+  header .sub{color:#aebfc5;margin-top:8px;font-size:15px}
+
+  .stat-strip{background:#fbf4ec;border:1px solid #f1e2cf;border-radius:10px;padding:16px 18px;
+    margin:0 0 8px;font-size:14.5px;color:#7a5526}
+  .stat-strip strong{color:#5c3d14}
+  .lead{color:var(--ink-2);margin:6px 0 18px}
+
+  section{border-top:1px solid var(--line);break-inside:avoid}
+  h2.section{font-size:20px;margin-bottom:3px}
+
+  .grp{margin-top:22px}
+  .grp .glabel{font-weight:700;font-size:15.5px;color:var(--ink)}
+  .grp .gdesc{font-size:13px;color:var(--ink-2);margin:3px 0 12px}
+
+  .row{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);break-inside:avoid;align-items:flex-start}
+  .row:last-child{border-bottom:none}
+  .row .main{flex:1}
+  .row .plat{font-weight:700;font-size:14.5px}
+  .row .act{font-size:13.5px;color:var(--ink-2);margin-top:3px}
+  .row .blk{font-size:12.5px;color:#a3322c;margin-top:4px}
+  .row .side{flex:0 0 auto;text-align:right;min-width:120px}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .badge.urgent{background:#fdeceb;color:var(--bad)}
+  .badge.gap{background:#eef1f2;color:var(--ink-2)}
+  .badge.info{background:#eaf3ff;color:#2a6fb0}
+  .chips{margin-top:6px;display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
+  .chip{font-size:10.5px;background:#eef2f3;color:var(--ink-2);padding:2px 8px;border-radius:6px}
+  .claimlink{font-size:12.5px;font-weight:600;margin-top:6px;display:inline-block}
+
+  pre{background:#0f2027;color:#d6e4e8;border-radius:10px;padding:16px 18px;overflow:auto;
+    font-size:12px;line-height:1.5;font-family:"SF Mono",Menlo,Consolas,monospace;white-space:pre}
+  .warn-box{background:#fff8ec;border:1px solid #f3dca6;border-left:4px solid var(--warn);
+    border-radius:0 8px 8px 0;padding:11px 14px;margin:10px 0;font-size:13px;color:#7a5526}
+  .note-box{background:#f7f9f9;border-left:3px solid var(--line);border-radius:0 6px 6px 0;
+    padding:9px 13px;margin:8px 0;font-size:12.5px;color:var(--ink-2)}
+  .ok-pill{display:inline-block;background:#e7f6ee;color:var(--good);font-weight:700;font-size:12px;
+    padding:4px 12px;border-radius:999px}
+
+  .gate-draft{background:#fff8ec;border:1px solid #f3dca6;border-left:4px solid var(--warn);
+    border-radius:0 8px 8px 0;padding:13px 16px;margin:12px 0 6px;font-size:13.5px;color:#7a5526}
+  .gate-ok{background:#e7f6ee;border:1px solid #b8e6cb;border-left:4px solid var(--good);
+    border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0 6px;font-size:13.5px;color:#15703f}
+  .faq-item{padding:13px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+  .faq-item:last-child{border-bottom:none}
+  .faq-q{font-weight:700;font-size:14.5px;color:var(--ink)}
+  .faq-a{font-size:13.5px;color:var(--ink-2);margin-top:5px}
+  .faq-meta{margin-top:7px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .wc{font-size:11px;color:var(--muted)}
+  .verify-chip{font-size:10.5px;background:#fdeceb;color:#a3322c;padding:2px 9px;border-radius:6px;font-weight:600}
+
+  footer{padding:22px 46px;font-size:11.5px;color:var(--muted);background:#fafbfb;border-top:1px solid var(--line)}
+  footer p{margin:4px 0}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;border-radius:0}section,.row,.grp{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">{{ v.brand }} · AI-Citation Kit</div>
+    <h1>{{ v.business_name }}</h1>
+    <div class="sub">
+      {% if v.trade %}{{ v.trade }}{% endif %}{% if v.city %} · {{ v.city }}{% endif %}
+      {% if v.generated %} · {{ v.generated }}{% endif %}
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <div class="pad">
+    <div class="eyebrow">How to get AI to recommend you</div>
+    <p class="lead">When someone asks ChatGPT, Perplexity, or Google's AI for the best {{ v.trade or 'business' }}{% if v.city %} in {{ v.city }}{% endif %}, the AI builds its answer from a handful of trusted sources. This kit shows the exact sources it pulled from — and gets you into them.</p>
+    <div class="stat-strip">
+      The AI assistants cited <strong>{{ v.summary.sources_ai_cited or 0 }}</strong> sources for your query. You have <strong>{{ v.summary.claimable_gaps or 0 }}</strong> listings to claim{% if v.summary.cited_but_unclaimed %}, and <strong>{{ v.summary.cited_but_unclaimed }}</strong> of them are sources the AI <em>already trusts for your exact query</em> — the fastest wins.{% else %}.{% endif %}
+      {% if v.own_site_cited_by %} Your own website is already cited by {{ v.own_site_cited_by | join(', ') }} — good; we build on that.{% endif %}
+    </div>
+  </div>
+
+  <!-- DIRECTORY-GAP LIST -->
+  <section class="pad">
+    <div class="eyebrow">Deliverable 1</div>
+    <h2 class="section">Where to get listed — the sources AI trusts</h2>
+    {% for grp in v.sections %}
+    <div class="grp">
+      <div class="glabel">{{ grp.label }}</div>
+      <div class="gdesc">{{ grp.desc }}</div>
+      {% for r in grp.rows %}
+      <div class="row">
+        <div class="main">
+          <div class="plat">{{ r.platform or r.domain }}{% if r.effort_minutes %} <span class="muted" style="font-weight:400;font-size:12px">· ~{{ r.effort_minutes }} min{% if r.free is false %} · paid{% endif %}</span>{% endif %}</div>
+          <div class="act">{{ r.action }}</div>
+          {% for b in r.blockers %}<div class="blk">⚠ {{ b }}</div>{% endfor %}
+          {% if r.claim_url %}<a class="claimlink" href="{{ r.claim_url }}">Claim here →</a>{% endif %}
+        </div>
+        <div class="side">
+          {% if r.status == 'cited-but-unclaimed' %}<span class="badge urgent">★ AI cites this — claim it</span>
+          {% elif r.status == 'unclaimed' %}<span class="badge gap">Missing listing</span>
+          {% elif r.status == 'cited-not-claimable' %}<span class="badge info">AI cites this</span>
+          {% elif r.status == 'cited-not-in-map' %}<span class="badge info">AI pulled from here</span>
+          {% else %}<span class="badge gap">{{ r.status }}</span>{% endif %}
+          {% if r.cited_by_engines %}<div class="chips">{% for e in r.cited_by_engines %}<span class="chip">{{ e }}</span>{% endfor %}</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- FAQ CONTENT -->
+  <section class="pad">
+    <div class="eyebrow">Deliverable 2</div>
+    <h2 class="section">Answers AI can quote — your FAQ</h2>
+    <p class="lead">AI assistants build their answers by lifting clean, self-contained passages. These {{ v.faq.item_count }} Q&amp;A are written conclusion-first and kept short on purpose, so ChatGPT, Perplexity, and Google's AI can quote them directly. Publish them on a visible FAQ page on your site.</p>
+
+    {% if v.faq.status == 'approved' %}
+      <div class="gate-ok">✓ Fact-checked &amp; approved by <strong>{{ v.faq.approved_by }}</strong>{% if v.faq.approved_at %} on {{ v.faq.approved_at[:10] }}{% endif %}. The FAQPage markup is now included in Deliverable 3 below — but only deploy it once these exact answers are visible on your page.</div>
+    {% else %}
+      <div class="gate-draft">⏳ <strong>Draft — human fact-check required.</strong> {{ v.faq.gate_notice }}{% if v.faq.items_flagged %} <strong>{{ v.faq.items_flagged }}</strong> answer{{ 's' if v.faq.items_flagged != 1 else '' }} below contain a specific claim to verify (look for the red “verify” tags). {% endif %}Until it's approved, the FAQPage markup stays OUT of your schema.</div>
+    {% endif %}
+    {% if v.faq.note %}<div class="note-box">{{ v.faq.note }}</div>{% endif %}
+
+    {% for it in v.faq['items'] %}
+    <div class="faq-item">
+      <div class="faq-q">{{ loop.index }}. {{ it.question }}</div>
+      <div class="faq-a">{{ it.answer }}</div>
+      <div class="faq-meta">
+        <span class="wc">{{ it.word_count }} words</span>
+        {% for fl in it.flags %}<span class="verify-chip">verify: {{ fl }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- SCHEMA -->
+  <section class="pad">
+    <div class="eyebrow">Deliverable 3</div>
+    <h2 class="section">Your structured-data markup ({{ v.schema.subtype }})</h2>
+    <p class="lead">Paste this into the &lt;head&gt; of your homepage. It tells Google exactly what your business is, where it serves, and how to reach you — earning rich results and keeping your business data unambiguous. One honest note: AI assistants read your <em>visible</em> page content, not this markup — the FAQ above and your listings are what get you quoted; this is the Google-side foundation.</p>
+    {% if v.schema.compliance.valid %}<span class="ok-pill">✓ Schema valid</span>{% else %}<span class="badge urgent">✗ Not valid — see errors</span>{% endif %}
+
+    {% for e in v.schema.compliance.errors %}<div class="warn-box" style="border-left-color:var(--bad);background:#fdeceb;color:#a3322c">✗ {{ e }}</div>{% endfor %}
+    {% for w in v.schema.compliance.warnings %}<div class="warn-box">⚠ Before publishing: {{ w }}</div>{% endfor %}
+
+    <pre>{{ v.schema.script_tag }}</pre>
+
+    {% for n in v.schema.compliance.notes %}<div class="note-box">{{ n }}</div>{% endfor %}
+  </section>
+
+  <footer>
+    <p>Citation sources are taken from live queries to ChatGPT, Perplexity, and Google's AI Overview and are a dated snapshot — AI answers vary by location and over time. Re-check quarterly.</p>
+    <p>Directory data and claim processes current to {{ v.generated }}. Verify each platform's requirements before claiming. Listing data and ratings provided by Google; Google and the Google logo are trademarks of Google LLC.</p>
+    <p>{{ v.brand }} · AI-Citation Kit</p>
+  </footer>
+
+</div>
+</body>
+</html>
